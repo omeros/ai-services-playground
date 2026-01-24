@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Upload</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<section style="display: flex; justify-self: center" >
+  <div >
+    <h1>Hello Ai</h1>
+    <input type="file" name="file"  id="fileInput">
+    <button onclick="onFire()">Upload File</button>  
+  </div>
+
+</section>
+  
+
+
+<script>
+  async function onFire() {
+    // var file = document.querySelector('input[name="file"]').files[0];
+    const fileInput = document.getElementById('fileInput');
+        // Check if a file is selected
+        if (fileInput.files.length === 0) {
+      console.error('No file selected');
+      return;
+    }
+
+    // Get the first file
+    const file = fileInput.files[0];
+    console.log('the file: ' , file);
+    // Create FormData object
+    const formData = new FormData();
+    formData.append('file', file);
+    try {
+        const response = await axios.post('http://localhost:3002/googleCloud/speechToTextSync',  formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+        console.log('Upload Success:', response.data);
+    } catch (error) {
+        console.error('Upload Error:', error);
+    }
+  }
+    </script>
+</body>
+</html>
+
+
+<!-- <script>
+  async function uploadFile() {
+    // Get the file input element
+    const fileInput = document.getElementById('fileInput');
+    
+    // Check if a file is selected
+    if (fileInput.files.length === 0) {
+      console.error('No file selected');
+      return;
+    }
+
+    // Get the first file
+    const file = fileInput.files[0];
+
+    // Create FormData object
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      const response = await axios.post('http://localhost:3002/googleCloud/speechToTextSync', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      console.log('Upload Success:', response.data);
+    } catch (error) {
+      console.error('Upload Error:', error);
+    }
+  }
+</script> -->
+</body>
+</html>

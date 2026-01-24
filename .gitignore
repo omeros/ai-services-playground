@@ -1,0 +1,98 @@
+# Credentials / secrets
+**/credentials/
+**/service-account-key.json
+**/*service-account*.json
+
+
+
+# Local data folders (do not commit)
+transcription_files/
+uploads_files/
+**/transcription_files/
+**/uploads_files/
+
+
+
+# =========================
+# OS / Editor
+# =========================
+.DS_Store
+Thumbs.db
+
+.vscode/
+.idea/
+*.swp
+*.swo
+*.code-workspace
+
+# =========================
+# Environment files (secrets)
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# Logs
+# =========================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# =========================
+# Dependencies
+# =========================
+node_modules/
+**/node_modules/
+
+# =========================
+# Build outputs
+# =========================
+dist/
+build/
+**/dist/
+**/build/
+
+# Vite / Vue
+front/.vite/
+**/.vite/
+
+# =========================
+# Testing / Coverage
+# =========================
+coverage/
+**/coverage/
+.nyc_output/
+
+# =========================
+# Caches
+# =========================
+.cache/
+**/.cache/
+.eslintcache
+**/.eslintcache
+*.tsbuildinfo
+
+# =========================
+# Runtime / Temp
+# =========================
+tmp/
+temp/
+**/tmp/
+**/temp/
+
+# If backend stores uploads locally (uncomment if relevant)
+# backend/uploads/
+# **/uploads/
+
+# =========================
+# npm choice: keep package-lock.json
+# prevent committing other lockfiles
+# =========================
+yarn.lock
+pnpm-lock.yaml
+
+
