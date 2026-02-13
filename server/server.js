@@ -11,6 +11,7 @@ var speechToTextRouter = require('./routes/speechToText');
 var openAiRouter = require('./routes/openAi');
 var googleCloudRouter = require('./routes/googleCloud');
 var callsRouter = require('./routes/calls');
+var resumeRouter = require('./routes/resume');
 var cors = require('cors');
 
 var app = express();
@@ -34,6 +35,7 @@ app.use('/speechToText', speechToTextRouter);
 app.use('/openAi', openAiRouter);
 app.use('/googleCloud', googleCloudRouter);
 app.use('/api/calls', callsRouter);
+app.use('/api/resume', resumeRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

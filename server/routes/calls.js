@@ -12,7 +12,10 @@ const callsController = new CallsController();
 
 router.post('/transcript/mysummarize', uploadToDisk .single('audioFile'), (req, res) => callsController.myTranscribeAndSummarizeFromDisk(req, res));  
 router.post('/transcript/anayzel', uploadToDisk .single('audioFile') ,(req, res) => callsController.myAnalyzeCallTranscriptFromDisk(req, res));  
-router.post('/transcript/disk/mp3', uploadToDisk .single('audioMp3File') ,(req, res) => callsController.myCallTranscriptFromDiskMp3(req, res));  
+
+// Audio files:
+router.post('/transcript/disk/mp3/heb', uploadToDisk .single('audioMp3File') ,(req, res) => callsController.myCallTranscriptFromDiskMp3Heb(req, res));  
+router.post('/transcript/disk/mp3/eng', uploadToDisk .single('audioMp3File') ,(req, res) => callsController.myCallTranscriptFromDiskMp3Eng(req, res));  
 router.post('/transcript/disk/mp4', uploadMP4ToDisk .single('audioMp4File') ,(req, res) => callsController.myCallTranscriptFromDiskMp4(req, res));  
 router.post('/transcript/disk/m4a', uploadM4A.single('audioM4AFile'), (req, res) => callsController.myCallTranscriptFromDiskM4A(req, res));
 

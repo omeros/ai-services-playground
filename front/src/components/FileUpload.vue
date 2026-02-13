@@ -4,7 +4,7 @@
     
     <div v-if="selectedFile">
       <!-- <p>Selected file: {{ selectedFile.name }}</p> -->
-      <button @click="onClearFile">Remove</button>
+      <button @click="onClearFile">New</button>
     </div>
   </div>
 </template>

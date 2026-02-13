@@ -292,7 +292,7 @@ async myCallTranscriptFromDiskM4A(req, res) {
 
 
 
-  async myCallTranscriptFromDiskMp3(req, res){
+  async myCallTranscriptFromDiskMp3Heb(req, res){
     try {  
       // Validate request  
       if (!req.file) {  
@@ -310,6 +310,46 @@ async myCallTranscriptFromDiskM4A(req, res) {
         {  
           sentenceCount: 10,  
           languageCode: 'he-IL'  
+        }  
+      );  
+   // const transcriptFromFile = fs.readFileSync('./trasnscription_files/0502606168_2-transcript-1743454075915.txt', 'utf8'); 
+      // await fs.write(result, `./files/transcribed_${fileName}.txt`,'utf8')
+      // Return a more structured response  
+      return res.status(200).json({  
+        success: true,  
+        transcription:  result.transcript,    
+      });  
+    } catch (error) {  
+      console.error(`Error processing call: ${error.message}`, error);  
+      return res.status(500).json({  
+        success: false,  
+        error: `Failed to process call: ${error.message}`  
+      });  
+    } finally {  
+      // Optional: Clean up the uploaded file if desired  
+      // if (req.file && req.file.path) {  
+      //   fs.unlinkSync(req.file.path);  
+      // }  
+    } 
+  }
+  async myCallTranscriptFromDiskMp3Eng(req, res){
+    try {  
+      // Validate request  
+      if (!req.file) {  
+        return res.status(400).json({  
+          success: false,  
+          error: 'No audio file provided'  
+        });  
+      }  
+      const fileName = req.file.originalname;  
+      const filepath = path.join(__dirname, '../', process.env.MP3_UPLOAD_FOLDER_FILES, req.file.filename); // Use multer filename   
+      console.log(`Processing file: ${fileName}`); 
+      // Call the service with the file path  
+      const result = await this.callService.myCallTranscriptFromDiskMp3(  
+        filepath,  
+        {  
+          sentenceCount: 10,  
+          languageCode: 'en-US'  
         }  
       );  
    // const transcriptFromFile = fs.readFileSync('./trasnscription_files/0502606168_2-transcript-1743454075915.txt', 'utf8'); 

@@ -6,8 +6,11 @@
         <div class="padding2 ">
           <div class="width-80 margin-auto ">
             <h2>Upload Your File</h2>
-            <button style="cursor: pointer;" v-if="selectedFile" @click="uploaMP3dFile">
-              Upload Mp3 File
+            <button style="cursor: pointer;" v-if="selectedFile" @click="uploaMP3EnglishFile">
+              Upload English Mp3 File
+            </button>
+            <button style="cursor: pointer;" v-if="selectedFile" @click="uploaMP3HebrewFile">
+              Upload Hebrew Mp3 File
             </button>
             <button style="cursor: pointer;" v-if="selectedFile" @click="uploaMP4dFile">
               Upload Mp4 File
@@ -48,12 +51,26 @@ const onClearFile = () =>{
   selectedFile.value = null
 }
 
-const uploaMP3dFile = async () => {
+const uploaMP3EnglishFile = async () => {
   if (!selectedFile.value) return
     const formData = new FormData();
     formData.append('audioMp3File', selectedFile.value);
     try {
-        const response = await  apiService.transcriptMP3dFile(formData)
+        const response = await  apiService.transcriptMP3FileEn(formData)
+        console.log('Upload Success:', response.data);
+        const transcription = response.data.transcription
+        titleReactive.value = "Your transcription"
+        transcriptAns.value = transcription
+    } catch (error) {
+        console.error('Upload Error:', error);
+    }
+};
+const uploaMP3HebrewFile = async () => {
+  if (!selectedFile.value) return
+    const formData = new FormData();
+    formData.append('audioMp3File', selectedFile.value);
+    try {
+        const response = await  apiService.transcriptMP3FileHeb(formData)
         console.log('Upload Success:', response.data);
         const transcription = response.data.transcription
         titleReactive.value = "Your transcription"

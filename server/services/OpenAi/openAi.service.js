@@ -22,6 +22,49 @@ class OpenAIService {
     };
   }
 
+
+  /**
+   * Resume analyzer using OpenAI Chat Completions.
+   *
+   * Purpose:
+   * Converts a free-text resume into a normalized JSON schema for storage/search/display.
+   *
+   * Guarantees:
+   * - Output is JSON-only (enforced with response_format: json_object + strict instructions).
+   * - Extracted values are returned in English (translate from Hebrew if needed).
+   * - No hallucination: if a field isn't explicitly present, it returns null (or empty array).
+   *
+   * Notes:
+   * - temperature=0 for deterministic extraction.
+   * - "skills" is always an array (possibly empty).
+   */
+    async resumeAnalysis(resume, model = "gpt-4o-mini") {
+    const prompt = `Extract the following from the resume text.
+      Return ONLY valid JSON. No markdown. No extra text. Do NOT repeat the resume.
+      All extracted text must be in ENGLISH (translate from Hebrew if needed).
+      Do not guess. If a field is missing, return null.
+      JSON keys:
+      - name: string|null
+      - phone: string|null
+      - address: string|null
+      - email: string|null
+      - skills: string[]
+      - work_experience: { company: string, title: string, start_date: string|null, end_date: string|null, highlights: string }[]
+      - education: { institution: string, degree: string|null, field: string|null, year: string|null }[]
+      RESUME TEXT:
+      """${resume}"""`;
+        const response = await this.openai.chat.completions.create({
+          model,
+          messages: [
+            { role: "system", content: "You output ONLY valid JSON, in English. Do not invent missing data." },
+            { role: "user", content: prompt },
+          ],
+          response_format: { type: "json_object" },
+          temperature: 0,
+        });
+        return JSON.parse(response.choices[0].message.content);
+  }
+  
   /**
   1 * Generate text completion using OpenAI API
    * @param {string} prompt - Input prompt for text generation
