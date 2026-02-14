@@ -13,7 +13,7 @@ const router = createRouter({
     },
     {
       path: '/transcript',
-      name: 'home',
+      name: 'transcript',
       component: TranscriptPage,
     },
     {

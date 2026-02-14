@@ -67,8 +67,8 @@
 <script setup lang="ts">
 import FileUpload from "../components/FileUpload.vue";
 import { ref } from "vue";
-import { apiService } from "@/services/api.service";
-import transcriptPreview from "@/components/transcript-preview.vue";
+import { apiService } from "../services/api.service";
+import transcriptPreview from "../components/transcript-preview.vue";
 
 const selectedFile = ref<File | null>(null);
 const titleReactive = ref("Transcript your Audio");

@@ -1,4 +1,4 @@
-@import "tailwindcss";
+html { font-family: "Inter Tight", system-ui, sans-serif; }
 
 body{
     margin: auto;
